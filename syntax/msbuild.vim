@@ -14,7 +14,7 @@ set cpo-=C
 let s:undo_ftplugin = ""
 
 " Source the XML syntax for this buffer.
-runtime syntax/xml.vim
+runtime! syntax/xml.vim syntax/xml/*.vim
 
 " Make sure the syntax file is not loaded again for this buffer.
 let b:current_syntax = "msbuild"
