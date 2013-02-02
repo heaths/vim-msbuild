@@ -22,6 +22,8 @@ To keep up-to-date with changes, I recommend using Git and installing [pathogen.
     cd /d %USERPROFILE%\vimfiles\bundle
     git clone https://github.com/heaths/vim-msbuild.git
 
+To make help content available when using pathogen, start vim and type `:Helptags`. You can then type `:help msbuild` for more information.
+
 License
 -------
 

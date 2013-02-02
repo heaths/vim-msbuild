@@ -1,0 +1,81 @@
+*msbuild.txt* Vim plugin for MSBuild project support
+
+Maintainer: Heath Stewart <http://github.com/heaths>
+License:    Apache 2.0
+Version:    1.0
+
+INTRODUCTION                                                *msbuild-syntax*
+
+This Vim plugin enables syntax support for all typical MSBuild project and
+include files matching the following patterns:
+
+    *.*proj
+    *.props
+    *.targets
+
+You can also build an open project from within Vim using ":make". Any
+warnings or errors can then be opened directly. You can also pass command
+line parameters to ":make" like you would to msbuild.exe, like: >
+
+    :make /t:rebuild
+>
+Some items and imported projects or targets can also be opened with |gf|.
+Any environment variables in the path are expanded automatically if
+possible.
+
+
+ABOUT                                                       *msbuild-about*
+
+You can grab the latest version or report and issue on Github:
+
+http://github.com/heaths/vim-msbuild
+
+
+                                                            *msbuild-files*
+OPENING FILES                                               *msbuild-opening*
+
+You can use commands like |gf| to open files authored into a project, like in
+the following example: >
+
+    <ItemGroup>
+        <Compile Include="Main.cs"/>
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath32)\Example.targets"/>
+
+Here, both "Main.cs" and "$(MSBuildExtensionsPath32)\Example.targets" would be
+opened into a new buffer.
+
+An attempt is made to resolve any properties in a path in the format
+"$(property)". A number of MSBuild reserved properties are defined and you may
+define your own specific to your environment. See |msbuild-variables| for
+more information about customizing path resolution.
+
+
+VARIABLES                                                   *msbuild-variables*
+
+Most of the MSBuild reserved properties that represent direcories and files
+are automatically defined and locked to prevent change. You can see which
+properties are defined along with their values by typing the following: >
+
+    :let g:msbuild_reserved
+    :let b:msbuild_reserved
+
+Machine-wide properties are defined globally, while file-specific properties
+are defined for the current buffer.
+
+These properties are used for commands like |gf| along with any properties you
+define at either the global or buffer scope in the "msbuild_properties"
+|Dictionary| variable: >
+
+    :let g:msbuild_properties = {'TargetFrameworkVersion': 'v4.5'}
+
+Any attempt to redefine reserved properties is simply ignored.
+
+If a property is not defined, the property name in the format "$(property)" is
+automatically evaluated as an environment variable. If no environment variable
+matching the property name is defined, an error is reported along with as
+much of the path that could be resolved.
+
+
+------------------------------------------------------------------------------
+ vim:ft=help:
