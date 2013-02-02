@@ -1,7 +1,7 @@
 " Vim compiler file
-" Compiler:	MSBuild
-" Maintainer:	Heath Stewart <heaths@outlook.com>
-" Last Change:	2013 Jan 29
+" Compiler:     MSBuild
+" Maintainer:   Heath Stewart <heaths@outlook.com>
+" Version:      1.0
 
 if exists("current_compiler")
   finish

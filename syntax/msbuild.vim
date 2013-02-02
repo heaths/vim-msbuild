@@ -1,7 +1,7 @@
 " Vim syntax file
-" Language:	MSBuild
-" Maintainer:	Heath Stewart <heaths@outlook.com>
-" Last Change:	2013 Jan 29
+" Language:     MSBuild
+" Maintainer:   Heath Stewart <heaths@outlook.com>
+" Version:      1.0
 
 " Quit when a syntax file was already loaded for this buffer.
 if exists("b:current_syntax") | finish | endif

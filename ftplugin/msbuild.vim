@@ -1,7 +1,7 @@
 " Vim filetype plugin file
-" Language:	MSBuild
-" Maintainer:	Heath Stewart <heaths@outlook.com>
-" Last Change:	2013 Feb 1
+" Language:     MSBuild
+" Maintainer:   Heath Stewart <heaths@outlook.com>
+" Version:      1.0
 
 " Only do this when not done yet for this buffer.
 if exists("b:did_ftplugin") | finish | endif
