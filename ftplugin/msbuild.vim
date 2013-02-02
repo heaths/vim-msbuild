@@ -1,7 +1,7 @@
 " Vim filetype plugin file
 " Language:	MSBuild
 " Maintainer:	Heath Stewart <heaths@outlook.com>
-" Last Change:	2013 Jan 29
+" Last Change:	2013 Feb 1
 
 " Only do this when not done yet for this buffer.
 if exists("b:did_ftplugin") | finish | endif
@@ -66,12 +66,28 @@ if expand("<afile>:e") =~ ".*proj$"
     let b:msbuild_reserved.MSBuildProjectName = b:msbuild_reserved.MSBuildThisFileName
 endif
 
+" Merge global reserved properties and lock.
+if exists("g:msbuild_reserved")
+    let b:msbuild_reserved = extend(b:msbuild_reserved, g:msbuild_reserved)
+endif
+
 lockv! b:msbuild_reserved
 
 " Define the function to resolve path variables.
 func! MSBuildResolvePath(var)
-    let s:msbuild_reserved = extend(copy(b:msbuild_reserved), g:msbuild_reserved)
-    return get(s:msbuild_reserved, a:var, expand("$" . a:var))
+    let properties = copy(b:msbuild_reserved)
+
+    " Merge user-defined global properties, which may have changed.
+    if exists("g:msbuild_properties") && type(g:msbuild_properties) == type({})
+        let properties = extend(properties, g:msbuild_properties, "keep")
+    endif
+
+    " Merge user-defined buffer properties, which may have changed.
+    if exists("b:msbuild_properties") && type(b:msbuild_properties) == type({})
+        let properties = extend(properties, b:msbuild_properties, "keep")
+    endif
+
+    return get(properties, a:var, expand("$" . a:var))
 endf
 
 " Enable opening include files.
