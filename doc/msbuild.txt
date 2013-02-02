@@ -3,6 +3,8 @@
 Maintainer: Heath Stewart <http://github.com/heaths>
 License:    Apache 2.0
 Version:    1.0
+Repository: https://github.com/heaths/vim-msbuild
+Vimball:    http://www.vim.org/scripts/script.php?script_id=4422
 
 INTRODUCTION                                                *msbuild-syntax*
 

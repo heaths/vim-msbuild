@@ -2,6 +2,8 @@
 " Language:     MSBuild
 " Maintainer:   Heath Stewart <heaths@outlook.com>
 " Version:      1.0
+" Repository:   https://github.com/heaths/vim-msbuild
+" Vimball:      http://www.vim.org/scripts/script.php?script_id=4422
 
 " Quit when a syntax file was already loaded for this buffer.
 if exists("b:current_syntax") | finish | endif

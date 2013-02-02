@@ -24,6 +24,12 @@ To keep up-to-date with changes, I recommend using Git and installing [pathogen.
 
 To make help content available when using pathogen, start vim and type `:Helptags`. You can then type `:help msbuild` for more information.
 
+If you prefer to install the scripts directly, you can download the [vimball](http://www.vim.org/scripts/script.php?script_id=4422), open it in vim, and install it like so:
+
+    vim msbuild.vba
+    :so %
+    :q
+
 License
 -------
 
