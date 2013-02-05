@@ -1,7 +1,7 @@
 " Vim filetype plugin file
 " Language:     MSBuild
 " Maintainer:   Heath Stewart <heaths@outlook.com>
-" Version:      1.0
+" Version:      1.1
 " Repository:   https://github.com/heaths/vim-msbuild
 " Vimball:      http://www.vim.org/scripts/script.php?script_id=4422
 
@@ -32,19 +32,19 @@ setl isident+=(,)
 if !exists("g:msbuild_reserved") && exists("$ProgramFiles")
     let g:msbuild_reserved = {}
     if !exists("$ProgramFiles(x86)") || expand("$ProgramFiles") == expand("$ProgramFiles(x86)")
-        let g:msbuild_reserved.MSBuildProgramFiles32 = expand("$ProgramFiles")
+        let g:msbuild_reserved.MSBuildProgramFiles32 = expand('$ProgramFiles\')
         let g:msbuild_reserved.MSBuildProgramFiles = g:msbuild_reserved.MSBuildProgramFiles32
     else
-        let g:msbuild_reserved.MSBuildProgramFiles32 = expand("$ProgramFiles(x86)")
-        let g:msbuild_reserved.MSBuildProgramFiles64 = expand("$ProgramFiles")
+        let g:msbuild_reserved.MSBuildProgramFiles32 = expand('$ProgramFiles(x86)\')
+        let g:msbuild_reserved.MSBuildProgramFiles64 = expand('$ProgramFiles\')
         let g:msbuild_reserved.MSBuildProgramFiles = g:msbuild_reserved.MSBuildProgramFiles64
     endif
 
-    let g:msbuild_reserved.MSBuildExtensionsPath32 = g:msbuild_reserved.MSBuildProgramFiles32 . "\\MSBuild"
-    let g:msbuild_reserved.MSBuildExtensionsPath = g:msbuild_reserved.MSBuildProgramFiles . "\\MSBuild"
+    let g:msbuild_reserved.MSBuildExtensionsPath32 = g:msbuild_reserved.MSBuildProgramFiles32 . 'MSBuild\'
+    let g:msbuild_reserved.MSBuildExtensionsPath = g:msbuild_reserved.MSBuildProgramFiles . 'MSBuild\'
 
     if get(g:msbuild_reserved, "MSBuildProgramFiles64")
-        let g:msbuild_reserved.MSBuildExtensionsPath64 = g:msbuild_reserved.MSBuildProgramFiles64 . "\\MSBuild"
+        let g:msbuild_reserved.MSBuildExtensionsPath64 = g:msbuild_reserved.MSBuildProgramFiles64 . 'MSBuild\'
     endif
 
     lockv! g:msbuild_reserved
@@ -53,8 +53,8 @@ endif
 " Set up buffer-specific reserved properties.
 let b:msbuild_reserved = {}
 let b:msbuild_reserved.MSBuildThisFile = expand("%:t")
-let b:msbuild_reserved.MSBuildThisFileDirectory = expand("%:p:h")
-let b:msbuild_reserved.MSBuildThisFileDirectoryNoRoot = substitute(expand("%:p:h"), '\w:', "", "")
+let b:msbuild_reserved.MSBuildThisFileDirectory = expand("%:p:h") . '\'
+let b:msbuild_reserved.MSBuildThisFileDirectoryNoRoot = substitute(expand("%:p:h"), '\w:', "", "") . '\'
 let b:msbuild_reserved.MSBuildThisFileExtension = expand("%:e")
 let b:msbuild_reserved.MSBuildThisFileFullPath = expand("%:p")
 let b:msbuild_reserved.MSBuildThisFileName = expand("%:t:r")
@@ -94,7 +94,7 @@ endf
 
 " Enable opening include files.
 setl isfname+=(,)
-setl includeexpr=substitute(v:fname,'\\$(\\(\\w\\+\\))','\\=MSBuildResolvePath(submatch(1))','g')
+setl includeexpr=simplify(substitute(v:fname,'\\$(\\(\\w\\+\\))','\\=MSBuildResolvePath(submatch(1))','g'))
 
 " Set compiler options.
 compiler msbuild
