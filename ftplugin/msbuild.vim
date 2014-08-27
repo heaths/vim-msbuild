@@ -27,7 +27,7 @@ if exists("b:undo_ftplugin")
 endif
 
 " Set up global reserved properties.
-setl isident+=(,)
+setl iskeyword+=(,)
 
 if !exists("g:msbuild_reserved") && exists("$ProgramFiles")
     let g:msbuild_reserved = {}
@@ -112,7 +112,7 @@ endif
 let b:undo_ftplugin =
     \ "unlockv! b:msbuild_reserved | " .
     \ "unlet! b:browsefilter b:msbuild_reserved | " .
-    \ "setlocal isident< isfname< includeexpr< | " .
+    \ "setlocal iskeyword< isfname< includeexpr< | " .
     \ s:undo_ftplugin
 
 " Restore the saved compatibility options.
